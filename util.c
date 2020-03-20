@@ -1561,7 +1561,6 @@ S_with_queued_errors(pTHX_ SV *ex)
 STATIC bool
 S_invoke_exception_hook(pTHX_ SV *ex, bool warn)
 {
-    dVAR;
     HV *stash;
     GV *gv;
     CV *cv;
@@ -1979,7 +1978,6 @@ Perl_warner(pTHX_ U32  err, const char* pat,...)
 void
 Perl_vwarner(pTHX_ U32  err, const char* pat, va_list* args)
 {
-    dVAR;
     PERL_ARGS_ASSERT_VWARNER;
     if (
         (PL_warnhook == PERL_WARNHOOK_FATAL || ckDEAD(err)) &&
@@ -2144,7 +2142,6 @@ version has desirable safeguards
 void
 Perl_my_setenv(pTHX_ const char *nam, const char *val)
 {
-  dVAR;
 #    ifdef __amigaos4__
   amigaos4_obtain_environ(__FUNCTION__);
 #    endif
@@ -2275,7 +2272,6 @@ my_setenv_out:
 void
 Perl_my_setenv(pTHX_ const char *nam, const char *val)
 {
-    dVAR;
     char *envstr;
     const Size_t nlen = strlen(nam);
     Size_t vlen;
@@ -2623,7 +2619,6 @@ Perl_atfork_lock(void)
 #endif
 {
 #if defined(USE_ITHREADS)
-    dVAR;
     /* locks must be held in locking order (if any) */
 #  ifdef USE_PERLIO
     MUTEX_LOCK(&PL_perlio_mutex);
@@ -2649,7 +2644,6 @@ Perl_atfork_unlock(void)
 #endif
 {
 #if defined(USE_ITHREADS)
-    dVAR;
     /* locks must be released in same order as in atfork_lock() */
 #  ifdef USE_PERLIO
     MUTEX_UNLOCK(&PL_perlio_mutex);
@@ -2737,7 +2731,6 @@ Perl_rsignal(pTHX_ int signo, Sighandler_t handler)
     struct sigaction act, oact;
 
 #ifdef USE_ITHREADS
-    dVAR;
     /* only "parent" interpreter can diddle signals */
     if (PL_curinterp != aTHX)
 	return (Sighandler_t) SIG_ERR;
@@ -2776,7 +2769,6 @@ int
 Perl_rsignal_save(pTHX_ int signo, Sighandler_t handler, Sigsave_t *save)
 {
 #ifdef USE_ITHREADS
-    dVAR;
 #endif
     struct sigaction act;
 
@@ -2806,7 +2798,6 @@ int
 Perl_rsignal_restore(pTHX_ int signo, Sigsave_t *save)
 {
 #ifdef USE_ITHREADS
-    dVAR;
 #endif
     PERL_UNUSED_CONTEXT;
 #ifdef USE_ITHREADS
@@ -2835,14 +2826,12 @@ Perl_rsignal(pTHX_ int signo, Sighandler_t handler)
 static Signal_t
 sig_trap(int signo)
 {
-    dVAR;
     PL_sig_trapped++;
 }
 
 Sighandler_t
 Perl_rsignal_state(pTHX_ int signo)
 {
-    dVAR;
     Sighandler_t oldsig;
 
 #if defined(USE_ITHREADS) && !defined(WIN32)
@@ -3387,7 +3376,6 @@ void *
 Perl_get_context(void)
 {
 #if defined(USE_ITHREADS)
-    dVAR;
 #  ifdef OLD_PTHREADS_API
     pthread_addr_t t;
     int error = pthread_getspecific(PL_thr_key, &t);
@@ -3408,7 +3396,6 @@ void
 Perl_set_context(void *t)
 {
 #if defined(USE_ITHREADS)
-    dVAR;
 #endif
     PERL_ARGS_ASSERT_SET_CONTEXT;
 #if defined(USE_ITHREADS)
@@ -3459,7 +3446,6 @@ Perl_get_opargs(pTHX)
 PPADDR_t*
 Perl_get_ppaddr(pTHX)
 {
-    dVAR;
     PERL_UNUSED_CONTEXT;
     return (PPADDR_t*)PL_ppaddr;
 }
@@ -3623,7 +3609,6 @@ void
 Perl_init_tm(pTHX_ struct tm *ptm)	/* see mktime, strftime and asctime */
 {
 #ifdef HAS_TM_TM_ZONE
-    dVAR;
     Time_t now;
     const struct tm* my_tm;
     PERL_UNUSED_CONTEXT;
@@ -5081,7 +5066,6 @@ Perl_my_vsnprintf(char *buffer, const Size_t len, const char *format, va_list ap
 void
 Perl_my_clearenv(pTHX)
 {
-    dVAR;
 #if ! defined(PERL_MICRO)
 #  if defined(PERL_IMPLICIT_SYS) || defined(WIN32)
     PerlEnv_clearenv();
@@ -5146,7 +5130,6 @@ extending the interpreter's PL_my_cxt_list array */
 void *
 Perl_my_cxt_init(pTHX_ int *indexp, size_t size)
 {
-    dVAR;
     void *p;
     int index;
 

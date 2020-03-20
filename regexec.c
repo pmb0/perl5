@@ -496,7 +496,6 @@ S_isFOO_utf8_lc(pTHX_ const U8 classnum, const U8* character, const U8* e)
      * rules, ignoring any locale.  So use the Unicode function if this class
      * requires an inversion list, and use the Unicode macro otherwise. */
 
-    dVAR;
 
     PERL_ARGS_ASSERT_ISFOO_UTF8_LC;
 
@@ -2098,7 +2097,6 @@ STATIC char *
 S_find_byclass(pTHX_ regexp * prog, const regnode *c, char *s, 
     const char *strend, regmatch_info *reginfo)
 {
-    dVAR;
 
     /* TRUE if x+ need not match at just the 1st pos of run of x's */
     const I32 doevery = (prog->intflags & PREGf_SKIP) == 0;
@@ -4273,7 +4271,6 @@ S_setup_EXACTISH_ST_c1_c2(pTHX_ const regnode * const text_node, int *c1p,
      * to/from code points */
     bool utf8_has_been_setup = FALSE;
 
-    dVAR;
 
     U8 *pat = (U8*)STRING(text_node);
     U8 folded[UTF8_MAX_FOLD_CHAR_EXPAND * UTF8_MAXBYTES_CASE + 1] = { '\0' };
@@ -4606,7 +4603,6 @@ S_isGCB(pTHX_ const GCB_enum before, const GCB_enum after, const U8 * const strb
 STATIC GCB_enum
 S_backup_one_GCB(pTHX_ const U8 * const strbeg, U8 ** curpos, const bool utf8_target)
 {
-    dVAR;
     GCB_enum gcb;
 
     PERL_ARGS_ASSERT_BACKUP_ONE_GCB;
@@ -4884,7 +4880,6 @@ S_isLB(pTHX_ LB_enum before,
 STATIC LB_enum
 S_advance_one_LB(pTHX_ U8 ** curpos, const U8 * const strend, const bool utf8_target)
 {
-    dVAR;
 
     LB_enum lb;
 
@@ -4915,7 +4910,6 @@ S_advance_one_LB(pTHX_ U8 ** curpos, const U8 * const strend, const bool utf8_ta
 STATIC LB_enum
 S_backup_one_LB(pTHX_ const U8 * const strbeg, U8 ** curpos, const bool utf8_target)
 {
-    dVAR;
     LB_enum lb;
 
     PERL_ARGS_ASSERT_BACKUP_ONE_LB;
@@ -5152,7 +5146,6 @@ S_isSB(pTHX_ SB_enum before,
 STATIC SB_enum
 S_advance_one_SB(pTHX_ U8 ** curpos, const U8 * const strend, const bool utf8_target)
 {
-    dVAR;
     SB_enum sb;
 
     PERL_ARGS_ASSERT_ADVANCE_ONE_SB;
@@ -5186,7 +5179,6 @@ S_advance_one_SB(pTHX_ U8 ** curpos, const U8 * const strend, const bool utf8_ta
 STATIC SB_enum
 S_backup_one_SB(pTHX_ const U8 * const strbeg, U8 ** curpos, const bool utf8_target)
 {
-    dVAR;
     SB_enum sb;
 
     PERL_ARGS_ASSERT_BACKUP_ONE_SB;
@@ -5423,7 +5415,6 @@ S_advance_one_WB(pTHX_ U8 ** curpos,
                        const bool utf8_target,
                        const bool skip_Extend_Format)
 {
-    dVAR;
     WB_enum wb;
 
     PERL_ARGS_ASSERT_ADVANCE_ONE_WB;
@@ -5461,7 +5452,6 @@ S_advance_one_WB(pTHX_ U8 ** curpos,
 STATIC WB_enum
 S_backup_one_WB(pTHX_ WB_enum * previous, const U8 * const strbeg, U8 ** curpos, const bool utf8_target)
 {
-    dVAR;
     WB_enum wb;
 
     PERL_ARGS_ASSERT_BACKUP_ONE_WB;
@@ -5760,7 +5750,6 @@ bounds of our window into the string.
 STATIC SSize_t
 S_regmatch(pTHX_ regmatch_info *reginfo, char *startpos, regnode *prog)
 {
-    dVAR;
     const bool utf8_target = reginfo->is_utf8_target;
     const U32 uniflags = UTF8_ALLOW_DEFAULT;
     REGEXP *rex_sv = reginfo->prog;
@@ -9422,7 +9411,6 @@ STATIC I32
 S_regrepeat(pTHX_ regexp *prog, char **startposp, const regnode *p,
             char * loceol, regmatch_info *const reginfo, I32 max _pDEPTH)
 {
-    dVAR;
     char *scan;     /* Pointer to current position in target string */
     I32 c;
     char *this_eol = loceol;   /* potentially adjusted version. */
@@ -10115,7 +10103,6 @@ S_regrepeat(pTHX_ regexp *prog, char **startposp, const regnode *p,
 STATIC bool
 S_reginclass(pTHX_ regexp * const prog, const regnode * const n, const U8* const p, const U8* const p_end, const bool utf8_target)
 {
-    dVAR;
     const char flags = (inRANGE(OP(n), ANYOFH, ANYOFHs))
                         ? 0
                         : ANYOF_FLAGS(n);
@@ -10660,7 +10647,6 @@ Perl_is_grapheme(pTHX_ const U8 * strbeg, const U8 * s, const U8 * strend, const
      * so code using it would then break), and there has to be a GCB break
      * before and after the character. */
 
-    dVAR;
 
     GCB_enum cp_gcb_val, prev_cp_gcb_val, next_cp_gcb_val;
     const U8 * prev_cp_start;
@@ -10782,7 +10768,6 @@ Perl_isSCRIPT_RUN(pTHX_ const U8 * s, const U8 * send, const bool utf8_target)
      * characters for at least one language in the Unicode Common Locale Data
      * Repository [CLDR]. */
 
-    dVAR;
 
     /* Things that match /\d/u */
     SV * decimals_invlist = PL_XPosix_ptrs[_CC_DIGIT];
