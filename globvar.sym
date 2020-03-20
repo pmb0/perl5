@@ -17,7 +17,6 @@ PL_fold
 PL_fold_latin1
 PL_fold_locale
 PL_freq
-PL_global_struct_size
 PL_hexdigit
 PL_inf
 PL_interp_size
