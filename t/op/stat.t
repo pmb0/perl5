@@ -39,7 +39,6 @@ my $Is_Cygwin  = $^O eq 'cygwin';
 my $Is_Darwin  = $^O eq 'darwin';
 my $Is_Dos     = $^O eq 'dos';
 my $Is_MSWin32 = $^O eq 'MSWin32';
-my $Is_NetWare = $^O eq 'NetWare';
 my $Is_OS2     = $^O eq 'os2';
 my $Is_Solaris = $^O eq 'solaris';
 my $Is_VMS     = $^O eq 'VMS';
@@ -47,7 +46,7 @@ my $Is_MPRAS   = $^O =~ /svr4/ && -f '/etc/.relid';
 my $Is_Android = $^O =~ /android/;
 my $Is_Dfly    = $^O eq 'dragonfly';
 
-my $Is_Dosish  = $Is_Dos || $Is_OS2 || $Is_MSWin32 || $Is_NetWare;
+my $Is_Dosish  = $Is_Dos || $Is_OS2 || $Is_MSWin32;
 
 my $ufs_no_ctime = ($Is_Dfly || $Is_Darwin) && (() = `df -t ufs . 2>/dev/null`) == 2;
 
@@ -87,7 +86,7 @@ SKIP: {
 
 SKIP: {
   skip "mtime and ctime not reliable", 2
-    if $Is_MSWin32 or $Is_NetWare or $Is_Cygwin or $Is_Dos or $Is_Darwin;
+    if $Is_MSWin32 or $Is_Cygwin or $Is_Dos or $Is_Darwin;
 
   ok( $mtime,           'mtime' );
   is( $mtime, $ctime,   'mtime == ctime' );
@@ -144,7 +143,6 @@ SKIP: {
                                      if $Is_Amiga;
         # Win32 could pass $mtime test but as FAT and NTFS have
         # no ctime concept $ctime is ALWAYS == $mtime
-        # expect netware to be the same ...
         skip "No ctime concept on this OS", 2
                                      if $Is_MSWin32 || $ufs_no_ctime;
 
@@ -252,7 +250,7 @@ ok(! -e $tmpfile_link,  '   -e on unlinked file');
 
 SKIP: {
     skip "No character, socket or block special files", 6
-      if $Is_MSWin32 || $Is_NetWare || $Is_Dos;
+      if $Is_MSWin32 || $Is_Dos;
     skip "/dev isn't available to test against", 6
       unless -d '/dev' && -r '/dev' && -x '/dev';
     skip "Skipping: unexpected ls output in MP-RAS", 6
@@ -362,7 +360,7 @@ SKIP: {
     my $TTY = "/dev/tty";
 
     SKIP: {
-        skip "Test uses unixisms", 2 if $Is_MSWin32 || $Is_NetWare;
+        skip "Test uses unixisms", 2 if $Is_MSWin32;
         skip "No TTY to test -t with", 2 unless -e $TTY;
 
         open(TTY, $TTY) ||
