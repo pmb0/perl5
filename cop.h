@@ -428,13 +428,8 @@ struct cop {
 #  define CopFILEGV(c)		(CopFILE(c) \
 				 ? gv_fetchfile(CopFILE(c)) : NULL)
 
-#  ifdef NETWARE
-#    define CopFILE_set(c,pv)	((c)->cop_file = savepv(pv))
-#    define CopFILE_setn(c,pv,l)  ((c)->cop_file = savepvn((pv),(l)))
-#  else
-#    define CopFILE_set(c,pv)	((c)->cop_file = savesharedpv(pv))
-#    define CopFILE_setn(c,pv,l)  ((c)->cop_file = savesharedpvn((pv),(l)))
-#  endif
+#  define CopFILE_set(c,pv)	((c)->cop_file = savesharedpv(pv))
+#  define CopFILE_setn(c,pv,l)  ((c)->cop_file = savesharedpvn((pv),(l)))
 
 #  define CopFILESV(c)		(CopFILE(c) \
 				 ? GvSV(gv_fetchfile(CopFILE(c))) : NULL)
@@ -447,11 +442,7 @@ struct cop {
 #  define CopSTASH_set(c,hv)	((c)->cop_stashoff = (hv)		\
 				    ? alloccopstash(hv)			\
 				    : 0)
-#  ifdef NETWARE
-#    define CopFILE_free(c) SAVECOPFILE_FREE(c)
-#  else
-#    define CopFILE_free(c)	(PerlMemShared_free(CopFILE(c)),(CopFILE(c) = NULL))
-#  endif
+#  define CopFILE_free(c)	(PerlMemShared_free(CopFILE(c)),(CopFILE(c) = NULL))
 #else
 #  define CopFILEGV(c)		((c)->cop_filegv)
 #  define CopFILEGV_set(c,gv)	((c)->cop_filegv = (GV*)SvREFCNT_inc(gv))

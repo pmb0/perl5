@@ -1,17 +1,6 @@
 #define PERL_EXT_POSIX
 #define PERL_EXT
 
-#ifdef NETWARE
-	#define _POSIX_
-	/*
-	 * Ideally this should be somewhere down in the includes
-	 * but putting it in other places is giving compiler errors.
-	 * Also here I am unable to check for HAS_UNAME since it wouldn't have
-	 * yet come into the file at this stage - sgp 18th Oct 2000
-	 */
-	#include <sys/utsname.h>
-#endif	/* NETWARE */
-
 #define PERL_NO_GET_CONTEXT
 
 #include "EXTERN.h"
@@ -1351,7 +1340,7 @@ static NV_PAYLOAD_TYPE S_getpayload(NV nv)
 #include <fcntl.h>
 
 #ifdef HAS_TZNAME
-#  if !defined(WIN32) && !defined(__CYGWIN__) && !defined(NETWARE) && !defined(__UWIN__)
+#  if !defined(WIN32) && !defined(__CYGWIN__) && !defined(__UWIN__)
 extern char *tzname[];
 #  endif
 #else
@@ -1375,7 +1364,7 @@ char *tzname[] = { "" , "" };
 #if defined (__CYGWIN__)
 #    define tzname _tzname
 #endif
-#if defined (WIN32) || defined (NETWARE)
+#if defined (WIN32)
 #  undef mkfifo
 #  define mkfifo(a,b) not_here("mkfifo")
 #  define ttyname(a) (char*)not_here("ttyname")
@@ -1402,12 +1391,10 @@ char *tzname[] = { "" , "" };
 #  define sigdelset(a,b)	not_here("sigdelset")
 #  define sigfillset(a)		not_here("sigfillset")
 #  define sigismember(a,b)	not_here("sigismember")
-#ifndef NETWARE
 #  undef setuid
 #  undef setgid
 #  define setuid(a)		not_here("setuid")
 #  define setgid(a)		not_here("setgid")
-#endif	/* NETWARE */
 #ifndef USE_LONG_DOUBLE
 #  define strtold(s1,s2)	not_here("strtold")
 #endif  /* USE_LONG_DOUBLE */
@@ -1436,7 +1423,7 @@ char *tzname[] = { "" , "" };
 #  ifdef I_UTIME
 #    include <utime.h>
 #  endif
-#endif /* WIN32 || NETWARE */
+#endif /* WIN32 */
 #endif /* __VMS */
 
 typedef int SysRet;
@@ -1531,9 +1518,7 @@ END_EXTERN_C
 #define tcsetpgrp(a,b) not_here("tcsetpgrp")
 #endif
 #ifndef HAS_TIMES
-#ifndef NETWARE
 #define times(a) not_here("times")
-#endif	/* NETWARE */
 #endif
 #ifndef HAS_UNAME
 #define uname(a) not_here("uname")
@@ -2968,7 +2953,7 @@ sigaction(sig, optaction, oldaction = 0)
 	SV *			optaction
 	POSIX::SigAction	oldaction
     CODE:
-#if defined(WIN32) || defined(NETWARE) || (defined(__amigaos4__) && defined(__NEWLIB__))
+#if defined(WIN32) || (defined(__amigaos4__) && defined(__NEWLIB__))
 	RETVAL = not_here("sigaction");
 #else
 # This code is really grody because we are trying to make the signal
