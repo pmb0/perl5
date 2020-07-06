@@ -128,8 +128,6 @@ system("chmod +x @exe") == 0
     or die "system: $!";
 
 my @writables = qw(
-    NetWare/config_H.wc
-    NetWare/Makefile
     feature.h
     lib/feature.pm
     keywords.h
