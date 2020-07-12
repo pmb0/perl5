@@ -2304,6 +2304,7 @@ my %feature_keywords = (
     evalbytes=>'evalbytes',
     __SUB__ => '__SUB__',
    fc       => 'fc',
+   CLEANUP  => 'cleanup_block',
 );
 
 # keywords that are strong and also have a prototype

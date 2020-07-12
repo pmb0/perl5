@@ -1917,9 +1917,22 @@ Perl_keyword (pTHX_ const char *name, I32 len, bool all_keywords)
           goto unknown;
       }
 
-    case 7: /* 30 tokens of length 7 */
+    case 7: /* 31 tokens of length 7 */
       switch (name[0])
       {
+        case 'C':
+          if (name[1] == 'L' &&
+              name[2] == 'E' &&
+              name[3] == 'A' &&
+              name[4] == 'N' &&
+              name[5] == 'U' &&
+              name[6] == 'P')
+          {                                       /* CLEANUP          */
+            return (all_keywords || FEATURE_CLEANUP_BLOCK_IS_ENABLED ? KEY_CLEANUP : 0);
+          }
+
+          goto unknown;
+
         case 'D':
           if (name[1] == 'E' &&
               name[2] == 'S' &&
@@ -3451,5 +3464,5 @@ unknown:
 }
 
 /* Generated from:
- * f77998a5bc995c1b42d3d080de227ef5f11638bcd329367431d8f193aef2d3cc regen/keywords.pl
+ * 9ce5f4226ebba10819366afd256d112c78379332425abb1c46c88833f29feaa8 regen/keywords.pl
  * ex: set ro: */

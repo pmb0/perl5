@@ -47,6 +47,7 @@ my %feature_kw = (
     __SUB__   => '__SUB__',
     fc        => 'fc',
     isa       => 'isa',
+    CLEANUP   => 'cleanup_block',
 );
 
 my %pos = map { ($_ => 1) } @{$by_strength{'+'}};
@@ -122,6 +123,7 @@ __END__
 +END
 +INIT
 +CHECK
++CLEANUP
 -abs
 -accept
 -alarm

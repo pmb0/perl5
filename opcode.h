@@ -546,6 +546,7 @@ EXTCONST char* const PL_op_name[] = {
 	"isa",
 	"cmpchain_and",
 	"cmpchain_dup",
+	"pushcleanup",
 	"freed",
 };
 #endif
@@ -954,6 +955,7 @@ EXTCONST char* const PL_op_desc[] = {
 	"derived class test",
 	"comparison chaining",
 	"comparand shuffling",
+	"push CLEANUP block",
 	"freed op",
 };
 #endif
@@ -1374,6 +1376,7 @@ EXT Perl_ppaddr_t PL_ppaddr[] /* or perlvars.h */
 	Perl_pp_isa,
 	Perl_pp_cmpchain_and,
 	Perl_pp_cmpchain_dup,
+	Perl_pp_pushcleanup,
 }
 #endif
 #ifdef PERL_PPADDR_INITED
@@ -1790,6 +1793,7 @@ EXT Perl_check_t PL_check[] /* or perlvars.h */
 	Perl_ck_isa,		/* isa */
 	Perl_ck_null,		/* cmpchain_and */
 	Perl_ck_null,		/* cmpchain_dup */
+	Perl_ck_null,		/* pushcleanup */
 }
 #endif
 #ifdef PERL_CHECK_INITED
@@ -2202,6 +2206,7 @@ EXTCONST U32 PL_opargs[] = {
 	0x00000204,	/* isa */
 	0x00000300,	/* cmpchain_and */
 	0x00000100,	/* cmpchain_dup */
+	0x00000800,	/* pushcleanup */
 };
 #endif
 
@@ -2873,6 +2878,7 @@ EXTCONST I16  PL_op_private_bitdef_ix[] = {
       12, /* isa */
        0, /* cmpchain_and */
        0, /* cmpchain_dup */
+      -1, /* pushcleanup */
 
 };
 
@@ -3369,6 +3375,7 @@ EXTCONST U8 PL_op_private_valid[] = {
     /* ISA        */ (OPpARG2_MASK),
     /* CMPCHAIN_AND */ (OPpARG1_MASK),
     /* CMPCHAIN_DUP */ (OPpARG1_MASK),
+    /* PUSHCLEANUP */ (0),
 
 };
 

@@ -61,6 +61,7 @@
 %token <ival> LOCAL MY REQUIRE
 %token <ival> COLONATTR FORMLBRACK FORMRBRACK
 %token <ival> SUBLEXSTART SUBLEXEND
+%token <ival> CLEANUP
 
 %type <ival> grammar remember mremember
 %type <ival>  startsub startanonsub startformsub
@@ -467,6 +468,29 @@ barestmt:	PLUGSTMT
 	|	sideff ';'
 			{
 			  $$ = $1;
+			}
+	|	CLEANUP mblock
+			{
+			  OP *block = op_scope($2);
+			  OP *start = LINKLIST(block);
+
+			  /* I'm sure there ought to be a better way to do all this */
+			  /* LINKLIST has turned the optree into a cycle. Find the end and
+			   * make it NULL again, to cause that to be the end of it
+			   */
+                          {
+                              OP *o = start;
+                              while(1) {
+                                  if(o->op_next == start) {
+                                      o->op_next = NULL;
+                                      break;
+                                  }
+              
+                                  o = o->op_next;
+                              }
+                          }
+
+			  $$ = newSVOP(OP_PUSHCLEANUP, 0, (SV *)start);
 			}
 	|	YADAYADA ';'
 			{

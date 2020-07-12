@@ -37,6 +37,7 @@ my %feature = (
     signatures      => 'signatures',
     isa             => 'isa',
     indirect        => 'indirect',
+    cleanup_block   => 'cleanup_block',
 );
 
 # NOTE: If a feature is ever enabled in a non-contiguous range of Perl
@@ -775,6 +776,10 @@ This feature is available under this name from Perl 5.32 onwards. In
 previous versions, it was simply on all the time.  To disallow (or
 warn on) indirect object syntax on older Perls, see the L<indirect>
 CPAN module.
+
+=head2 The 'cleanup_block' feature
+
+TODO
 
 =head1 FEATURE BUNDLES
 

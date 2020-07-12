@@ -21,6 +21,7 @@ our %feature = (
     refaliasing     => 'feature_refaliasing',
     postderef_qq    => 'feature_postderef_qq',
     unicode_eval    => 'feature_unieval',
+    cleanup_block   => 'feature_cleanup_block',
     declared_refs   => 'feature_myref',
     unicode_strings => 'feature_unicode',
 );
@@ -31,7 +32,7 @@ our %feature_bundle = (
     "5.15"    => [qw(current_sub evalbytes fc indirect say state switch unicode_eval unicode_strings)],
     "5.23"    => [qw(current_sub evalbytes fc indirect postderef_qq say state switch unicode_eval unicode_strings)],
     "5.27"    => [qw(bitwise current_sub evalbytes fc indirect postderef_qq say state switch unicode_eval unicode_strings)],
-    "all"     => [qw(bitwise current_sub declared_refs evalbytes fc indirect isa postderef_qq refaliasing say signatures state switch unicode_eval unicode_strings)],
+    "all"     => [qw(bitwise cleanup_block current_sub declared_refs evalbytes fc indirect isa postderef_qq refaliasing say signatures state switch unicode_eval unicode_strings)],
     "default" => [qw(indirect)],
 );
 
@@ -373,6 +374,10 @@ This feature is available under this name from Perl 5.32 onwards. In
 previous versions, it was simply on all the time.  To disallow (or
 warn on) indirect object syntax on older Perls, see the L<indirect>
 CPAN module.
+
+=head2 The 'cleanup_block' feature
+
+TODO
 
 =head1 FEATURE BUNDLES
 

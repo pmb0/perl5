@@ -7,7 +7,7 @@
 #define PERL_BISON_VERSION  30003
 
 #ifdef PERL_CORE
-/* A Bison parser, made by GNU Bison 3.3.2.  */
+/* A Bison parser, made by GNU Bison 3.3.  */
 
 /* Bison interface for Yacc-like parsers in C
 
@@ -117,32 +117,33 @@ extern int yydebug;
     FORMRBRACK = 316,
     SUBLEXSTART = 317,
     SUBLEXEND = 318,
-    PREC_LOW = 319,
-    OROP = 320,
-    DOROP = 321,
-    ANDOP = 322,
-    NOTOP = 323,
-    ASSIGNOP = 324,
-    OROR = 325,
-    DORDOR = 326,
-    ANDAND = 327,
-    BITOROP = 328,
-    BITANDOP = 329,
-    CHEQOP = 330,
-    NCEQOP = 331,
-    CHRELOP = 332,
-    NCRELOP = 333,
-    SHIFTOP = 334,
-    MATCHOP = 335,
-    UMINUS = 336,
-    REFGEN = 337,
-    POWOP = 338,
-    PREINC = 339,
-    PREDEC = 340,
-    POSTINC = 341,
-    POSTDEC = 342,
-    POSTJOIN = 343,
-    ARROW = 344
+    CLEANUP = 319,
+    PREC_LOW = 320,
+    OROP = 321,
+    DOROP = 322,
+    ANDOP = 323,
+    NOTOP = 324,
+    ASSIGNOP = 325,
+    OROR = 326,
+    DORDOR = 327,
+    ANDAND = 328,
+    BITOROP = 329,
+    BITANDOP = 330,
+    CHEQOP = 331,
+    NCEQOP = 332,
+    CHRELOP = 333,
+    NCRELOP = 334,
+    SHIFTOP = 335,
+    MATCHOP = 336,
+    UMINUS = 337,
+    REFGEN = 338,
+    POWOP = 339,
+    PREINC = 340,
+    PREDEC = 341,
+    POSTINC = 342,
+    POSTDEC = 343,
+    POSTJOIN = 344,
+    ARROW = 345
   };
 #endif
 
@@ -195,6 +196,6 @@ int yyparse (void);
 
 
 /* Generated from:
- * e5b801fdebce5c77dd8e644fc5a489cbea6af33db180e771dd9d669b12bbe0cf perly.y
+ * d35a14fe3a1ef77a79485c401b817c28c8ea055a86c77bfcc439b9b4ad57e43c perly.y
  * 0947213b55d0ed11693554bea04987e886cf285f5c14cf9075fa1e7acc3f4061 regen_perly.pl
  * ex: set ro: */

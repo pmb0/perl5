@@ -5795,6 +5795,7 @@ t/op/chars.t			See if character escapes work
 t/op/chdir.t			See if chdir works
 t/op/chop.t			See if chop works
 t/op/chr.t			See if chr works
+t/op/CLEANUP.t			See if CLEANUP blocks work
 t/op/closure.t			See if closures work
 t/op/closure_test.pl		Extra file for closure.t
 t/op/cmpchain.t			See if comparison chaining works

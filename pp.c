@@ -7160,6 +7160,33 @@ PP(pp_cmpchain_dup)
     RETURN;
 }
 
+static void
+invoke_cleanup_block(pTHX_ void *_arg)
+{
+    OP *start = (OP *)_arg;
+    I32 was_cxstack_ix = cxstack_ix;
+
+    ENTER;
+    SAVETMPS;
+
+    SAVEOP();
+    PL_op = start;
+
+    CALLRUNOPS(aTHX);
+
+    FREETMPS;
+    LEAVE;
+
+    assert(cxstack_ix == was_cxstack_ix);
+}
+
+PP(pp_pushcleanup)
+{
+    SAVEDESTRUCTOR_X(invoke_cleanup_block, cSVOP->op_sv);
+
+    return NORMAL;
+}
+
 /*
  * ex: set ts=8 sts=4 sw=4 et:
  */

@@ -131,6 +131,10 @@
 
 #define WARN_EXPERIMENTAL__ISA		 73
 
+/* Warnings Categories added in Perl 5.033 */
+
+#define WARN_EXPERIMENTAL__CLEANUP_BLOCK 74
+
 
 /*
 =for apidoc Amnh||WARN_ALL
@@ -207,6 +211,7 @@
 =for apidoc Amnh||WARN_EXPERIMENTAL__UNIPROP_WILDCARDS
 =for apidoc Amnh||WARN_EXPERIMENTAL__VLB
 =for apidoc Amnh||WARN_EXPERIMENTAL__ISA
+=for apidoc Amnh||WARN_EXPERIMENTAL__CLEANUP_BLOCK
 
 =cut
 */
