@@ -1537,7 +1537,7 @@ We then determine what the console should be on various systems:
 
 =cut
 
-    elsif ( $^O eq 'dos' or -e "con" or $^O eq 'MSWin32' ) {
+    elsif ( -e "con" or $^O eq 'MSWin32' ) {
         $console = "con";
     }
 
@@ -8967,7 +8967,7 @@ Just checks the contents of C<$^O> and sets the C<$doccmd> global accordingly.
 =cut
 
 sub setman {
-    $doccmd = $^O !~ /^(?:MSWin32|VMS|os2|dos|amigaos|riscos)\z/s
+    $doccmd = $^O !~ /^(?:MSWin32|VMS|os2|amigaos|riscos)\z/s
       ? "man"         # O Happy Day!
       : "perldoc";    # Alas, poor unfortunates
 } ## end sub setman
