@@ -486,7 +486,7 @@ executable code for that command or program.
 First, many systems have "internal" commands that are built-in to the
 shell or OS and while these commands can be invoked, there is no
 corresponding file.  Second, some operating systems (e.g., Cygwin,
-DJGPP, OS/2, and VOS) have required suffixes for executable files;
+OS/2, and VOS) have required suffixes for executable files;
 these suffixes are generally permitted on the command name but are not
 required.  Thus, a command like C<perl> might exist in a file named
 F<perl>, F<perl.exe>, or F<perl.pm>, depending on the operating system.
