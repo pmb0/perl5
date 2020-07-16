@@ -626,7 +626,7 @@ out of them.
  */
 
 /* define this once if either system, instead of cluttering up the src */
-#if defined(MSDOS) || defined(WIN32)
+#if defined(WIN32)
 #define DOSISH 1
 #endif
 
@@ -1112,7 +1112,7 @@ EXTERN_C int usleep(unsigned int);
 #define PERL_USES_PL_PIDSTATUS
 #endif
 
-#if !defined(OS2) && !defined(WIN32) && !defined(DJGPP)
+#if !defined(OS2) && !defined(WIN32)
 #define PERL_DEFAULT_DO_EXEC3_IMPLEMENTATION
 #endif
 
