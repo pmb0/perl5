@@ -1013,11 +1013,6 @@ Also see:
 
 =item *
 
-The djgpp environment for DOS, L<http://www.delorie.com/djgpp/>
-and L<perldos>.
-
-=item *
-
 The EMX environment for DOS, OS/2, etc. emx@iaehv.nl,
 L<ftp://hobbes.nmsu.edu/pub/os2/dev/emx/>  Also L<perlos2>.
 
@@ -2521,7 +2516,7 @@ L<http://www.cpan.org/ports/index.html> for binary distributions.
 =head1 SEE ALSO
 
 L<perlaix>, L<perlamiga>, L<perlbs2000>,
-L<perlcygwin>, L<perldos>,
+L<perlcygwin>,
 L<perlebcdic>, L<perlfreebsd>, L<perlhurd>, L<perlhpux>, L<perlirix>,
 L<perlmacos>, L<perlmacosx>,
 L<perlos2>, L<perlos390>, L<perlos400>,
