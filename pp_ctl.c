@@ -2473,6 +2473,12 @@ PP(pp_return)
 
     assert(cxstack_ix >= 0);
     if (cxix < cxstack_ix) {
+        I32 i;
+        /* Check for  CLEANUP { return; } */
+        for(i = cxstack_ix; i > cxix; i--) {
+            if(CxTYPE(&cxstack[i]) == CXt_CLEANUP)
+                DIE(aTHX_ "Can't \"return\" out of a CLEANUP block");
+        }
         if (cxix < 0) {
             if (!(       PL_curstackinfo->si_type == PERLSI_SORT
                   || (   PL_curstackinfo->si_type == PERLSI_MULTICALL
@@ -2612,8 +2618,15 @@ S_unwind_loop(pTHX)
                                                     label_len,
                                                     label_flags | SVs_TEMP)));
     }
-    if (cxix < cxstack_ix)
+    if (cxix < cxstack_ix) {
+        I32 i;
+        /* Check for  CLEANUP { last ... } etc */
+        for(i = cxstack_ix; i > cxix; i--) {
+            if(CxTYPE(&cxstack[i]) == CXt_CLEANUP)
+                croak("Can't \"%s\" out of a CLEANUP block", OP_NAME(PL_op));
+        }
 	dounwind(cxix);
+    }
     return &cxstack[cxix];
 }
 
@@ -3095,6 +3108,8 @@ PP(pp_goto)
 	    case CXt_FORMAT:
 	    case CXt_NULL:
 		DIE(aTHX_ "Can't \"goto\" out of a pseudo block");
+            case CXt_CLEANUP:
+                DIE(aTHX_ "Can't \"goto\" out of a CLEANUP block");
 	    default:
 		if (ix)
 		    DIE(aTHX_ "panic: goto, type=%u, ix=%ld",

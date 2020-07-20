@@ -6,7 +6,7 @@ BEGIN {
     set_up_inc('../lib');
 }
 
-plan 19;
+plan 22;
 
 use feature 'cleanup_block';
 no warnings 'experimental::cleanup_block';
@@ -208,4 +208,43 @@ no warnings 'experimental::cleanup_block';
     #   We should consider what the behaviour ought to be here
     # This test is happy for either exception to be seen, does not care which
     like($e, qr/^Oopsie \d\n/, 'CLEANUP block can throw exception during exception unwind');
+}
+
+{
+    my $sub = sub {
+        while(1) {
+            CLEANUP { return "retval" }
+            last;
+        }
+        return "wrong";
+    };
+
+    my $e = defined eval { $sub->(); 1 } ? undef : $@;
+    like($e, qr/^Can't "return" out of a CLEANUP block /,
+        'Cannot return out of CLEANUP block');
+}
+
+{
+    my $sub = sub {
+        while(1) {
+            CLEANUP { goto HERE }
+        }
+        HERE:
+    };
+
+    my $e = defined eval { $sub->(); 1 } ? undef : $@;
+    like($e, qr/^Can't "goto" out of a CLEANUP block /,
+        'Cannot goto out of CLEANUP block');
+}
+
+{
+    my $sub = sub {
+        LOOP: while(1) {
+            CLEANUP { last LOOP }
+        }
+    };
+
+    my $e = defined eval { $sub->(); 1 } ? undef : $@;
+    like($e, qr/^Can't "last" out of a CLEANUP block /,
+        'Cannot last out of CLEANUP block');
 }
