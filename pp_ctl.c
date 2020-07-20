@@ -1608,6 +1608,7 @@ Perl_dounwind(pTHX_ I32 cxix)
 	    break;
 	case CXt_BLOCK:
 	case CXt_NULL:
+        case CXt_CLEANUP:
             /* these two don't have a POPFOO() */
 	    break;
 	case CXt_FORMAT:

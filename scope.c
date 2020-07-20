@@ -1512,6 +1512,7 @@ Perl_cx_dump(pTHX_ PERL_CONTEXT *cx)
     switch (CxTYPE(cx)) {
     case CXt_NULL:
     case CXt_BLOCK:
+    case CXt_CLEANUP:
 	break;
     case CXt_FORMAT:
 	PerlIO_printf(Perl_debug_log, "BLK_FORMAT.CV = 0x%" UVxf "\n",
