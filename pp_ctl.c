@@ -1323,6 +1323,7 @@ static const char * const context_name[] = {
     "format",
     "eval",
     "substitution",
+    "CLEANUP block",
 };
 
 STATIC I32

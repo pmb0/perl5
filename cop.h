@@ -907,6 +907,7 @@ struct context {
 #define CXt_FORMAT     10
 #define CXt_EVAL       11
 #define CXt_SUBST      12
+#define CXt_CLEANUP    13
 /* SUBST doesn't feature in all switch statements.  */
 
 /* private flags for CXt_SUB and CXt_FORMAT */

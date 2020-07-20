@@ -7166,6 +7166,7 @@ invoke_cleanup_block(pTHX_ void *_arg)
     OP *start = (OP *)_arg;
     I32 was_cxstack_ix = cxstack_ix;
 
+    cx_pushblock(CXt_CLEANUP, G_VOID, PL_stack_sp, PL_savestack_ix);
     ENTER;
     SAVETMPS;
 
@@ -7176,6 +7177,19 @@ invoke_cleanup_block(pTHX_ void *_arg)
 
     FREETMPS;
     LEAVE;
+
+    {
+        PERL_CONTEXT *cx;
+
+        cx = CX_CUR();
+        assert(CxTYPE(cx) == CXt_CLEANUP);
+
+        PL_stack_sp = PL_stack_base + cx->blk_oldsp;
+
+        CX_LEAVE_SCOPE(cx);
+        cx_popblock(cx);
+        CX_POP(cx);
+    }
 
     assert(cxstack_ix == was_cxstack_ix);
 }
